@@ -1,4 +1,6 @@
 Parallelplot pp=null;
+float lowBound,upBound;
+boolean swap = false;
 class ParallelFrame extends Frame{
   int u0,v0,w,h;
   int border = 50;
@@ -9,24 +11,31 @@ class ParallelFrame extends Frame{
     v0 = v;
     w = wd;
     h = ht;
+    pp = new Parallelplot(u0,v0,w,h);
   }
   void draw(){
-    pp = new Parallelplot(u0,v0,w,h);
+    if(swap!=true){
+      lowBound = v0+h-border-spacer;
+      upBound = v0+border+spacer;
+    }
+    if(swap==true){
+      lowBound = v0+border+spacer;
+      upBound = v0+h-border-spacer;
+    }
     pp.draw();
     pp.printDataPoints();
   }
   void mouseClicked(){
-    pp.mouseClicked();
-
+    if(mouseX<u0+100&&mouseX>u0+10&&mouseY<v0+30&&mouseY>v0+10){
+      swap = !swap;
+    }
   }
 }
 
 
 class Parallelplot extends Frame{
   int u0,v0,w,h;
-  int rectW = 15; 
-  float lowBound;
-  float upBound;  
+  int rectW = 15;  
   boolean drawLabels = true;
   float clr=0;  
   Parallelplot(int u0,int v0,int w, int h){
@@ -36,10 +45,8 @@ class Parallelplot extends Frame{
     this.h=h;
   }
   void draw(){
-    lowBound = v0+h-border-spacer;
-    upBound = v0+border+spacer;
     stroke(0);
-    fill(110);
+    fill(191);
     rect(u0+10, v0+10, 90, 20,7);
     fill(0);
     textSize(12);
@@ -67,15 +74,21 @@ class Parallelplot extends Frame{
           fill(0);
           textSize(12);
           if(i==0){
-            text(Float.toString(minCol), x-14, lowBound+14);
-            text(Float.toString(maxCol), x-14, upBound-7);
+            if(swap==false){
+              text(Float.toString(minCol), x-14, lowBound+14);
+              text(Float.toString(maxCol), x-14, upBound-7);
+            }
+            if(swap==true){
+              text(Float.toString(minCol), x-14, lowBound-7);
+              text(Float.toString(maxCol), x-14, upBound+14);              
+            }
           }
           //  drawing data points
           stroke( 0 );
-          fill(238,130,238);
+          fill(223, 159, 190);
           ellipse(x,y,4,4);
           if(j!=0){
-            stroke(238,130,238);
+            stroke(223, 159, 190);
             line(x0,y0,x,y);
           }
           x0 = x;
@@ -109,7 +122,7 @@ class Parallelplot extends Frame{
         float x = map(j,0,table.getColumnCount()-1, u0+border+spacer, u0+w-border-spacer);
         if (Math.pow(mouseX - x,2) + Math.pow(mouseY - y,2) < 16.0){
           stroke(0);
-          fill(110);
+          fill(191);
           rect(x-10,y-40,70,30,7);
           fill(0);
           textSize(12);
@@ -118,13 +131,5 @@ class Parallelplot extends Frame{
       }
     }
   }
-  void mouseClicked(){
 
-          if(mouseX<u0+100&&mouseX>u0+10&&mouseY<v0+30&&mouseY>v0+10){
-           float k  = lowBound;
-           lowBound = upBound;
-           upBound = k;
-               println("doin");
-          }    
-  }
 }

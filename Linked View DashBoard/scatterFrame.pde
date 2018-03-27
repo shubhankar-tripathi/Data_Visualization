@@ -46,7 +46,7 @@ class ScatterFrame extends Frame{
     else{  
       detailed.draw();
       detailed.printDataPoints();
-      cancel = new SplitFrame(u0+detailed.border,v0+detailed.border,15,15,110);
+      cancel = new SplitFrame(u0+detailed.border,v0+detailed.border,15,15,191);
       cancel.draw();
       fill(0);
       text("<",u0+detailed.border+2,v0+detailed.border+12);
@@ -120,8 +120,8 @@ class Scatterplot extends Frame {
         float x = map( r.getFloat(idx0), minX, maxX, u0+border+spacer, u0+w-border-spacer );
         float y = map( r.getFloat(idx1), minY, maxY, v0+h-border-spacer, v0+border+spacer );
         
-        stroke(238,130,238);
-        fill(238,130,238);
+        stroke(223, 159, 190);
+        fill(223, 159, 190);
         ellipse( x,y,3,3 );
      }
      if( drawLabels ){
@@ -141,7 +141,7 @@ class Scatterplot extends Frame {
       float y = map( r.getFloat(idx1), minY, maxY, v0+h-border-spacer,v0+border+spacer );
       if (Math.pow(mouseX - x,2) + Math.pow(mouseY - y,2) < 9.0){
         stroke(0);
-        fill(110);
+        fill(191, 191, 191);
         rect(x-10,y-40,90,30,5);
         stroke(0);
         fill(0);

@@ -51,7 +51,7 @@ class BarFrame extends Frame{
       selectbp.k=4;
       selectbp.draw();
       selectbp.printDataPoints();
-      cancelbar = new SplitFrame(u0+selectbp.border,v0+selectbp.border,15,15,110);
+      cancelbar = new SplitFrame(u0+selectbp.border,v0+selectbp.border,15,15,191);
       cancelbar.draw();
       fill(0);
       text("<",u0+selectbp.border+2,v0+selectbp.border+12);
@@ -121,8 +121,8 @@ class Barplot extends Frame {
         float x = map( r.getFloat(idx0), minX, maxX, u0+this.border+this.spacer, u0+w-this.border-this.spacer-k );
         float y = map( r.getFloat(idx1), minY, maxY, v0+h-this.border-this.spacer, v0+this.border+this.spacer );
         
-        stroke(238,130,238);
-        fill(238,130,238);
+        stroke(223, 159, 190);
+        fill(223, 159, 190);
         rect(x,y,k,v0+h-this.border-this.spacer-y);
      }
      if( drawLabels ){
@@ -142,7 +142,7 @@ class Barplot extends Frame {
       float y = map( r.getFloat(idx1), minY, maxY, v0+h-border-spacer,v0+border+spacer );
       if (mouseX>x&&mouseX<x+k&&mouseY>y&&mouseY<v0+h-border-spacer){
         stroke(0);
-        fill(110);
+        fill(191);
         rect(x-10,y-40,90,30,5);
         stroke(0);
         fill(0);

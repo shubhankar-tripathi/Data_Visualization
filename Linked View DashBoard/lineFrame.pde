@@ -1,3 +1,4 @@
+import java.util.Collections;
 Lineplot selectlp = null;
 Frame cancelline = null;
 
@@ -92,6 +93,7 @@ class Lineplot extends Frame {
   boolean drawLabels = true;
   float spacer = 5;
   Table data;
+  ArrayList<Float[]> filteredData;
   ArrayList<float[]> drawPoints = null;
   Lineplot( Table data, int idx0, int idx1 ){
      
@@ -108,6 +110,24 @@ class Lineplot extends Frame {
      //table.getRowCount()
      //table.getRow()
      // row.getFloat();
+     data.sort(idx0);
+     float x=0;
+     filteredData = new ArrayList<Float[]>();
+     ArrayList<Float> temp = new ArrayList<Float>();
+     for(int i=0; i<data.getRowCount(); i++){
+       if(i==0){
+         temp.add(data.getRow(i).getFloat(idx1));
+       }
+       if(data.getRow(i).getFloat(idx0)==x){
+         temp.add(data.getRow(i).getFloat(idx1));
+       }
+       if(data.getRow(i).getFloat(idx0)>x&&i!=0||i==data.getRowCount()-1){
+         filteredData.add(new Float[] {data.getRow(i).getFloat(idx0),Collections.max(temp)});
+         temp.clear();
+         temp.add(data.getRow(i).getFloat(idx1));
+       }
+       x=data.getRow(i).getFloat(idx0);
+     }
   }
   int u0, v0, w, h;
   
@@ -124,26 +144,17 @@ class Lineplot extends Frame {
      rect( u0+this.border,v0+this.border, w-2*this.border, h-2*this.border,5);
      float x1=0;
      float y1=0;
-     for(int i=0; i<data.getRowCount(); i++){
-      // if()
-     }
-     for( int i = 0; i < data.getRowCount(); i++ ){
-        TableRow r = data.getRow(i);
-        float x = map( r.getFloat(idx0), minX, maxX, u0+this.border+this.spacer, u0+w-this.border-this.spacer-k );
-        float y = map( r.getFloat(idx1), minY, maxY, v0+h-this.border-this.spacer, v0+this.border+this.spacer );
-        stroke(238,130,238);
-        fill(238,130,238);
-        if(i>0){if(x>x1){
+     for( int i = 0; i < filteredData.size(); i++ ){
+        float x = map( filteredData.get(i)[0], minX, maxX, u0+this.border+this.spacer, u0+w-this.border-this.spacer-k );
+        float y = map( filteredData.get(i)[1], minY, maxY, v0+h-this.border-this.spacer, v0+this.border+this.spacer );
+        stroke(223, 159, 190);
+        fill(223, 159, 190);
+        if(i>0){
           line(x1,y1,x,y);
           ellipse(x1,y1,3,3);
           ellipse(x,y,3,3);
           x1 =x;
           y1 =y;          
-        }
-        
-        }
-        if(x==x1){
-          if(y>y1) y1=y;
         }
         if(i==0){
           x1 =x;
@@ -161,18 +172,17 @@ class Lineplot extends Frame {
      }
    }
    void printDataPoints(){
-    for( int i = 0; i < data.getRowCount(); i++ ){
-      TableRow r = data.getRow(i);
-      float x = map( r.getFloat(idx0),minX, maxX, u0+border+spacer, u0+w-border-spacer-k );
-      float y = map( r.getFloat(idx1), minY, maxY, v0+h-border-spacer,v0+border+spacer );
+    for( int i = 0; i < filteredData.size(); i++ ){
+      float x = map( filteredData.get(i)[0],minX, maxX, u0+border+spacer, u0+w-border-spacer-k );
+      float y = map( filteredData.get(i)[1], minY, maxY, v0+h-border-spacer,v0+border+spacer );
       if (Math.pow(mouseX - x,2) + Math.pow(mouseY - y,2) < 9.0){
         stroke(0);
-        fill(110);
+        fill(191);
         rect(x-10,y-40,90,30,5);
         stroke(0);
         fill(0);
         textSize(12);
-        text(r.getFloat(idx0)+", "+r.getFloat(idx1), x-5, y-20);
+        text(filteredData.get(i)[0]+", "+filteredData.get(i)[1], x-5, y-20);
       }
     }
   }
