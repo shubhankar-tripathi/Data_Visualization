@@ -2,8 +2,8 @@
 JSONObject values;
 Frame myFrame = null;
 final int CANVAS_WIDTH_DEFAULT  = 1000;
-final int CANVAS_HEIGHT_DEFAULT = 600;
-String dataPath = "Data_Visulaization/Force Directed Graph/data.csv";
+final int CANVAS_HEIGHT_DEFAULT = 1000;
+String dataPath = "Data_Visulaization/Force Directed Graph/miserables.json";
 void setup() {
   //size(1000, 1000); 
   int canvasWidth = CANVAS_WIDTH_DEFAULT;
