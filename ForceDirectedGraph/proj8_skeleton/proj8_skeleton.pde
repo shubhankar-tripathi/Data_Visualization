@@ -9,6 +9,7 @@ void setup() {
   int canvasWidth = CANVAS_WIDTH_DEFAULT;
   int canvasHeight = CANVAS_HEIGHT_DEFAULT;
   size(canvasWidth, canvasHeight);
+  getdata();
   //selectInput("Select a file to process:", "fileSelected");
 }
 
