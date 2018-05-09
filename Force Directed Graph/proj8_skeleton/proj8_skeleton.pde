@@ -1,27 +1,32 @@
 
 JSONObject values;
 Frame myFrame = null;
-
-
+final int CANVAS_WIDTH_DEFAULT  = 1000;
+final int CANVAS_HEIGHT_DEFAULT = 600;
+String dataPath = "Data_Visulaization/Force Directed Graph/data.csv";
 void setup() {
-  size(1000, 1000);  
-  selectInput("Select a file to process:", "fileSelected");
+  //size(1000, 1000); 
+  int canvasWidth = CANVAS_WIDTH_DEFAULT;
+  int canvasHeight = CANVAS_HEIGHT_DEFAULT;
+  size(canvasWidth, canvasHeight);
+  //selectInput("Select a file to process:", "fileSelected");
 }
 
-void fileSelected(File selection) {
+/*void fileSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
     selectInput("Select a file to process:", "fileSelected");
   } 
-  else {
-    println("User selected " + selection.getAbsolutePath());
+  else*/
+  void getdata(){
+    println("User selected " + /*selection.getAbsolutePath()*/ dataPath);
 
     ArrayList<GraphVertex> verts = new ArrayList<GraphVertex>();
     ArrayList<GraphEdge>   edges = new ArrayList<GraphEdge>();
 
 
     // TODO: PUT CODE IN TO LOAD THE GRAPH    
-    values = loadJSONObject(selection.getAbsolutePath());
+    values = loadJSONObject(/*selection.getAbsolutePath()*/dataPath);
     JSONArray nodes = values.getJSONArray("nodes");
     JSONArray links = values.getJSONArray("links");
     print(nodes.size()); 
@@ -45,7 +50,7 @@ void fileSelected(File selection) {
 
     myFrame = new ForceDirectedLayout( verts, edges );
   }
-}
+//}
 
 
 void draw() {
