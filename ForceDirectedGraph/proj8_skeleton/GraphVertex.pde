@@ -1,6 +1,6 @@
 // You shouldn't need to modify anything in this file but you can if you want
 import java.util.*;
-HashSet<Integer> groups = new HashSet<Integer>();
+//HashSet<Integer> groups = new HashSet<Integer>();
 public static final float DAMPING_COEFFICIENT = 0.75f;
 
 
@@ -19,7 +19,7 @@ public class GraphVertex {
     id = _id;
     group = _group;
     pos.set(_x,_y);
-    groups.add(group);
+    //groups.add(group);
     
   }
 
