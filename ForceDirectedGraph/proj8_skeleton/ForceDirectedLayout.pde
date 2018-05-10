@@ -87,9 +87,10 @@ class ForceDirectedLayout extends Frame {
       fill(p.getColor(),60,80);
       ellipse(qPos.x,qPos.y,diam,diam);
     }
-    Object[] arr = groups.toArray();
-    for(int i = 0; i < groups.toArray().length; i++){
-      int val = (Integer)arr[i];
+    //Object[] arr = groups.toArray();
+    int[] arr = {1,2,3,4,5,6,7,8};
+    for(int i = 0; i < arr.length; i++){
+      int val = arr[i];
       float clr = map((float)val, 0, 10, 20, 80);
       colorMode(HSB, 100, 100, 100);
       stroke(clr, 60, 80);
