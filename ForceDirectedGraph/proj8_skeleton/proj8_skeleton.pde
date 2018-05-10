@@ -20,7 +20,7 @@ void setup() {
   } 
   else*/
   void getdata(){
-    println("User selected " + /*selection.getAbsolutePath()*/ dataPath);
+    //println("User selected " + /*selection.getAbsolutePath()*/ dataPath);
 
     ArrayList<GraphVertex> verts = new ArrayList<GraphVertex>();
     ArrayList<GraphEdge>   edges = new ArrayList<GraphEdge>();
