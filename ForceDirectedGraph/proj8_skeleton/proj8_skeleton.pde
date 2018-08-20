@@ -22,7 +22,6 @@ void getdata(){
 	GraphVertex vert = new GraphVertex(table_nodes.getString(j,0), table_nodes.getInt(j,1), random(300,700), random(300,700));
     verts.add(vert);
   }
-  println(verts.size());
   for(int j=0; j<table_links.getRowCount(); j++){
     GraphVertex source = null;
     GraphVertex target = null;
@@ -33,7 +32,6 @@ void getdata(){
     GraphEdge edge = new GraphEdge(source, target, table_links.getInt(j,2)); 
     edges.add(edge);
   }
-  println(edges.size());
 
     myFrame = new ForceDirectedLayout( verts, edges );
 }
