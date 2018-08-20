@@ -1,8 +1,5 @@
 // You shouldn't need to modify anything in this file but you can if you want
-//import java.util.*;
-//HashSet<Integer> groups = new HashSet<Integer>();
 public static final float DAMPING_COEFFICIENT = 0.75f;
-
 
 public class GraphVertex {
 
@@ -18,9 +15,7 @@ public class GraphVertex {
   public GraphVertex( String _id, int _group, float _x, float _y ){
     id = _id;
     group = _group;
-    pos.set(_x,_y);
-    //groups.add(group);
-    
+    pos.set(_x,_y);    
   }
 
   public String getID(){ return id; }
@@ -45,7 +40,7 @@ public class GraphVertex {
   public PVector getForce(){ return frc; }
   
   public float getColor(){
-    float value = map(group, 0, 10, 0, 80);
+    float value = map(group, 0, 10, 20, 80);
     return value;
   }
   

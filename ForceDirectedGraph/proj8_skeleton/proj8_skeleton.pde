@@ -1,57 +1,43 @@
-
-JSONObject values;
+import java.util.*;
 Frame myFrame = null;
-final int CANVAS_WIDTH_DEFAULT  = 1000;
-final int CANVAS_HEIGHT_DEFAULT = 1000;
-String dataPath = "Data_Visualization/ForceDirectedGraph/miserables.json";
+String dataPathnodes = "data_miserables/nodes.csv";
+String dataPathlinks = "data_miserables/links.csv";
 void setup() {
-  //size(1000, 1000); 
-  int canvasWidth = CANVAS_WIDTH_DEFAULT;
-  int canvasHeight = CANVAS_HEIGHT_DEFAULT;
-  size(canvasWidth, canvasHeight);
+  size(1000, 1000); 
   getdata();
-  //selectInput("Select a file to process:", "fileSelected");
 }
 
-/*void fileSelected(File selection) {
-  if (selection == null) {
-    println("Window was closed or the user hit cancel.");
-    selectInput("Select a file to process:", "fileSelected");
-  } 
-  else*/
-  void getdata(){
-    //println("User selected " + /*selection.getAbsolutePath()*/ dataPath);
 
-    ArrayList<GraphVertex> verts = new ArrayList<GraphVertex>();
-    ArrayList<GraphEdge>   edges = new ArrayList<GraphEdge>();
+void getdata(){
+  
+  ArrayList<GraphVertex> verts = new ArrayList<GraphVertex>();
+  ArrayList<GraphEdge>   edges = new ArrayList<GraphEdge>();
 
 
-    // TODO: PUT CODE IN TO LOAD THE GRAPH    
-    values = loadJSONObject(/*selection.getAbsolutePath()*/dataPath);
-    JSONArray nodes = values.getJSONArray("nodes");
-    JSONArray links = values.getJSONArray("links");
-    print(nodes.size()); 
-    for(int j=0; j<nodes.size(); j++){
-      JSONObject vertObj = nodes.getJSONObject(j); 
-      GraphVertex vert = new GraphVertex(vertObj.getString("id"), vertObj.getInt("group"), random(300,700), random(300,700));
-      verts.add(vert);
+  // TODO: PUT CODE IN TO LOAD THE GRAPH 
+  Table table_nodes = new Table(dataPathnodes);
+  Table table_links = new Table(dataPathlinks);
+  
+  for(int j=0; j<table_nodes.getRowCount(); j++){
+	GraphVertex vert = new GraphVertex(table_nodes.getString(j,0), table_nodes.getInt(j,1), random(300,700), random(300,700));
+    verts.add(vert);
+  }
+  println(verts.size());
+  for(int j=0; j<table_links.getRowCount(); j++){
+    GraphVertex source = null;
+    GraphVertex target = null;
+    for(int k=0; k<verts.size(); k++){
+		if(verts.get(k).getID().equals(table_links.getString(j,0))) source = verts.get(k);
+        if(verts.get(k).getID().equals(table_links.getString(j,1))) target = verts.get(k);
     }
-    print(verts.size());
-    for(int j=0; j<links.size(); j++){
-      JSONObject edgeObj = links.getJSONObject(j);
-      GraphVertex source = null;
-      GraphVertex target = null;
-      for(int k=0; k<verts.size(); k++){
-        if(verts.get(k).getID().equals(edgeObj.getString("source"))) source = verts.get(k);
-        if(verts.get(k).getID().equals(edgeObj.getString("target"))) target = verts.get(k);
-      }
-      GraphEdge edge = new GraphEdge(source, target, edgeObj.getFloat("value")); 
-      edges.add(edge);
-    }
+    GraphEdge edge = new GraphEdge(source, target, table_links.getInt(j,2)); 
+    edges.add(edge);
+  }
+  println(edges.size());
 
     myFrame = new ForceDirectedLayout( verts, edges );
-  }
-//}
+}
+
 
 
 void draw() {
@@ -92,4 +78,48 @@ abstract class Frame {
     return (u0-clickBuffer < mouseX) && (u0+w+clickBuffer)>mouseX && (v0-clickBuffer)< mouseY && (v0+h+clickBuffer)>mouseY;
   }
   
+}
+
+// =========================================================================
+
+
+class Table {
+  int rowCountLocal;
+  String[][] data;
+  
+  Table(String filename) {
+    String[] rows = loadStrings(filename);
+    
+    data = new String[rows.length][];
+    rowCountLocal = 0;
+    for (int i = 0; i < rows.length; i++) {
+      if (trim(rows[i]).length() == 0) {
+        continue; // skip empty rows
+      }
+      if (rows[i].startsWith("#")) {
+        continue;  // skip comment lines
+      }
+      // split the row on the tabs
+      String[] pieces = split(rows[i], ',');
+      // copy to the table array
+      data[rowCountLocal] = pieces;
+      rowCountLocal++;
+    }
+  }
+  
+  int getRowCount() {
+    return rowCountLocal;
+  }
+  
+  String getString(int rowIndex, int column) {
+    return data[rowIndex][column];
+  }
+  
+  int getInt(int rowIndex, int column) {
+    return parseInt(getString(rowIndex, column));
+  }
+  
+  float getFloat(int rowIndex, int column) {
+    return parseFloat(getString(rowIndex, column));
+  }
 }

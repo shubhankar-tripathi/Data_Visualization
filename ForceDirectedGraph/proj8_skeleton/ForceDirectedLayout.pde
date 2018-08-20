@@ -90,7 +90,7 @@ class ForceDirectedLayout extends Frame {
     //Object[] arr = groups.toArray();
     int[] arr = {1,2,3,4,5,6,7,8};
     for(int i = 0; i < arr.length; i++){
-      int val = arr[i];
+      int val = (Integer)arr[i];
       float clr = map((float)val, 0, 10, 20, 80);
       colorMode(HSB, 100, 100, 100);
       stroke(clr, 60, 80);
@@ -98,7 +98,7 @@ class ForceDirectedLayout extends Frame {
       rect(10, 10*(i*5 + 1), 10, 5);
       colorMode(RGB,255);
       fill(0);
-      text("Group"+ arr[i], 25, 10*(i*5 + 1)+5);
+      text("Group "+ arr[i], 25, 10*(i*5 + 1)+5);
     }
 
   }

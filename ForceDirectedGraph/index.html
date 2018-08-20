@@ -3,12 +3,12 @@
    <head>
     <meta charset="UTF-8">
           <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.min.js"></script>
-    <title>Parallel Coordinates by using Processing</title>
+    <script src="processing.min.js">
+	</script>
+    <title>Force Directed Graph using Processing and Processing.js</title>
     <style>
       html {
-        font-family: sans-serif;
+        font-family: Raleway;
       }
       .container {
         width: 80%;
@@ -29,28 +29,21 @@
   </head>
   <body>
     <div class="container">
-      <h1>Parallel Coordinates by using Processing</h1>
-      <p>
-        <a href="http://en.wikipedia.org/wiki/Parallel_coordinates">Parallel coordinates (Wikipedia)</a>
+      <h1>Force Directed Graph</h1>
+	  <p >
+        <a href="https://shubhankar1201.github.io/">Home</a>
       </p>
       <p>
-        Parallel Coordinates is one way to visualize <b>multi-dimensional data</b>.
+        <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">Force Directed Graph (Wikipedia)</a> drawing algorithms are a class of algorithms for drawing graphs in an aesthetically-pleasing way.This simple force-directed graph shows character co-occurence in Les Misérables. A physical simulation of charged particles and springs places related characters in closer proximity, while unrelated characters are farther apart. Layout algorithm inspired by Tim Dwyer and Thomas Jakobsen. Data based on character coappearence in Victor Hugo's Les Misérables, compiled by Donald Knuth.
       </p>
       <p>
+	
         Acknowledgement:<br />
-        The dataset is from <a href="http://archive.ics.uci.edu/ml/datasets/Iris">UCI Machine Learning Repository: Iris Data Set</a>.
-      </p>
-      <p class="right">
-        <a href="index.html">Back to the index page</a>
+        The JSON data is derived from jean.dat in ftp://ftp.cs.stanford.edu/pub/sgb/sgb.tar.gz. It's part of the Stanford GraphBase discussed <a href=" http://www-cs-faculty.stanford.edu/~uno/sgb.html">here</a>.
       </p>
       <hr />
-      <ul>
-        <li>Mouseover to a line to show its feature values.</li>
-        <li>Click on a feature name to select.</li>
-        <li>Move a knob to change the range.</li>
-      </ul>
 
-      <canvas data-processing-sources="src/parallel_coordinates/invoker.pde src/parallel_coordinates/Viewport.pde src/parallel_coordinates/ParallelCoordinatesView.pde src/parallel_coordinates/Axis.pde src/parallel_coordinates/Sample.pde"></canvas>
+      <canvas data-processing-sources="proj8_skeleton/proj8_skeleton.pde proj8_skeleton/GraphVertex.pde proj8_skeleton/GraphEdge.pde proj8_skeleton/ForceDirectedLayout.pde"></canvas>
 
       <h2>Processing Source Code</h2>
       <p>
@@ -66,9 +59,11 @@
         
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<script src="js/bootstrap.min.js"></script>
+	</div>
   </body>
 </html>
