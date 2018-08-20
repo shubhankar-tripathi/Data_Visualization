@@ -3,7 +3,7 @@ Frame myFrame = null;
 String dataPathnodes = "data_miserables/nodes.csv";
 String dataPathlinks = "data_miserables/links.csv";
 void setup() {
-  size(400, 300); 
+  size(1000, 300); 
   getdata();
 }
 
@@ -19,7 +19,7 @@ void getdata(){
   Table table_links = new Table(dataPathlinks);
   
   for(int j=0; j<table_nodes.getRowCount(); j++){
-	GraphVertex vert = new GraphVertex(table_nodes.getString(j,0), table_nodes.getInt(j,1), random(100,300), random(50,250));
+	GraphVertex vert = new GraphVertex(table_nodes.getString(j,0), table_nodes.getInt(j,1), random(300,700), random(50,250));
     verts.add(vert);
   }
   for(int j=0; j<table_links.getRowCount(); j++){
