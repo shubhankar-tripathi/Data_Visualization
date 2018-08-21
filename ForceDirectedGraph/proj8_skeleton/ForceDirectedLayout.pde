@@ -5,7 +5,7 @@ class ForceDirectedLayout extends Frame {
   
   
   float RESTING_LENGTH = 15.0f;   // update this value
-  float SPRING_SCALE   = 0.075f; // update this value
+  float SPRING_SCALE   = 0.1f; // update this value
   float REPULSE_SCALE  = 400.0f;  // update this value
   float colorBlack = 0;
   float colorWhite = 180;
@@ -73,7 +73,7 @@ class ForceDirectedLayout extends Frame {
     // TODO: ADD CODE TO DRAW THE GRAPH
     for(int i = 0; i < edges.size(); i++){
       colorMode(HSB,100,100,100);
-      stroke(0);
+      stroke(0,0,50);
       line(edges.get(i).v0.getPosition().x, edges.get(i).v0.getPosition().y, edges.get(i).v1.getPosition().x, edges.get(i).v1.getPosition().y );
       GraphVertex p = edges.get(i).v0;
       GraphVertex q = edges.get(i).v1;
@@ -82,10 +82,10 @@ class ForceDirectedLayout extends Frame {
       float diam = p.getDiameter();
       stroke(p.getColor(),60,80);
       fill(p.getColor(),60,80);
-      ellipse(pPos.x,pPos.y,diam,diam);
+      ellipse(pPos.x,pPos.y,diam/2,diam/2);
       stroke(p.getColor(),60,80);
       fill(p.getColor(),60,80);
-      ellipse(qPos.x,qPos.y,diam,diam);
+      ellipse(qPos.x,qPos.y,diam/2,diam/2);
     }
     //Object[] arr = groups.toArray();
     int[] arr = {1,2,3,4,5,6,7,8};
